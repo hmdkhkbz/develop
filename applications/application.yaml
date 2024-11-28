@@ -6,13 +6,11 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: 'https://github.com/your-repo/crypto-exchange-cd.git'
-    targetRevision: HEAD
+    repoURL: https://gitlab.hmdkh.ir/root/develop.git
     path: .
+    targetRevision: HEAD
   destination:
-    server: 'https://kubernetes.default.svc'
+    server: https://kubernetes.default.svc
     namespace: crypto
   syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
+    automated: {}
