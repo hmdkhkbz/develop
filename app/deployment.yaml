@@ -51,7 +51,7 @@ spec:
             configMapKeyRef:
               key: DATABASE_PORT
               name: django-config
-        image: registry-c7e79e924d-nd.apps.ir-central1.arvancaas.ir/crypto-exchange5:088fc22279d189e7407445277c4ec080f426a624
+        image: registry-c7e79e924d-nd.apps.ir-central1.arvancaas.ir/crypto:088fc22279d189e7407445277c4ec080f426a624
         imagePullPolicy: Always
         name: django-container
         ports:
