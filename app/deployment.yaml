@@ -21,48 +21,13 @@ spec:
       labels:
         app: django-app
     spec:
-      initContainers:
-        - name: migrate
-          image: registry-c7e79e924d-nd.apps.ir-central1.arvancaas.ir/crypto:088fc22279d189e7407445277c4ec080f426a624  # Same image as the main container
-          imagePullPolicy: Always
-          command: ["python"]
-          args: ["/usr/src/app/Exchange/manage.py", "migrate"]
-          env:
-            - name: DATABASE_NAME
-              valueFrom:
-                secretKeyRef:
-                  key: DATABASE_NAME
-                  name: mysql-credentials
-            - name: DATABASE_USER
-              valueFrom:
-                secretKeyRef:
-                  key: DATABASE_USER
-                  name: mysql-credentials
-            - name: DATABASE_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  key: DATABASE_PASSWORD
-                  name: mysql-credentials
-            - name: DATABASE_HOST
-              valueFrom:
-                configMapKeyRef:
-                  key: DATABASE_HOST
-                  name: django-config
-            - name: DATABASE_PORT
-              valueFrom:
-                configMapKeyRef:
-                  key: DATABASE_PORT
-                  name: django-config
-
       containers:
         - name: django-container
           image: registry-c7e79e924d-nd.apps.ir-central1.arvancaas.ir/crypto:088fc22279d189e7407445277c4ec080f426a624
           imagePullPolicy: Always
-          ports:
-            - containerPort: 8000
-              protocol: TCP
-          command: ["python"]
-          args: ["/usr/src/app/Exchange/manage.py", "runserver", "0.0.0.0:8000"]
+          command: ["sh", "-c"]
+          args:
+            - "python /usr/src/app/Exchange/manage.py migrate && python /usr/src/app/Exchange/manage.py runserver 0.0.0.0:8000"
           env:
             - name: DATABASE_NAME
               valueFrom:
@@ -89,6 +54,9 @@ spec:
                 configMapKeyRef:
                   key: DATABASE_PORT
                   name: django-config
+          ports:
+            - containerPort: 8000
+              protocol: TCP
           resources: {}
           terminationMessagePath: /dev/termination-log
           terminationMessagePolicy: File
