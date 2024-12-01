@@ -23,7 +23,7 @@ spec:
     spec:
       containers:
         - name: django-container
-          image: registry-c7e79e924d-nd.apps.ir-central1.arvancaas.ir/crypto:088fc22279d189e7407445277c4ec080f426a624
+          image: registry-c7e79e924d-nd.apps.ir-central1.arvancaas.ir/cr:hp
           imagePullPolicy: Always
           command: ["sh", "-c"]
           args:
