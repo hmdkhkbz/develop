@@ -25,10 +25,6 @@ spec:
         - name: django-container
           image: registry-c7e79e924d-nd.apps.ir-central1.arvancaas.ir/cr:hp
           imagePullPolicy: Always
-          command: ["sh", "-c"]
-          args:
-            - "until nc -z $DATABASE_HOST $DATABASE_PORT; do echo waiting for db; sleep 2; done; python /usr/src/app/Exchange/manage.py migrate && python /usr/src/app/Exchange/manage.py runserver 0.0.0.0:8000"
-
           env:
             - name: DATABASE_NAME
               valueFrom:
