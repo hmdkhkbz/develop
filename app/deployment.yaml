@@ -52,7 +52,7 @@ spec:
         imagePullPolicy: Always
         name: django-container
         command: ["python"]
-        args: ["/usr/src/app/Exchange/manage.py", "runserver", "0.0.0.0:8000"]
+        args: ["/usr/src/app/Exchange/manage.py", "migrate"]
         ports:
         - containerPort: 8000
           protocol: TCP
