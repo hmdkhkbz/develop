@@ -1,6 +1,6 @@
 apiVersion: v1
 data:
-  DATABASE_HOST: cluster1-haproxy.pxc.svc.cluster.local
+  DATABASE_HOST: my-db-pxc-db-haproxy.pxc.svc.cluster.local
   DATABASE_PORT: "3306"
 kind: ConfigMap
 metadata:
