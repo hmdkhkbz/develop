@@ -19,7 +19,7 @@ spec:
             name: django-app-service  # Name of the service you want to expose
             port:
               number: 8000  # Port on the service (make sure it's the same port as in the service manifest)
-    tls:
-    - hosts:
-      - crypto.hmdkh.ir
-      secretName: crypto-tls
+  tls:
+  - hosts:
+    - crypto.hmdkh.ir
+    secretName: crypto-tls
