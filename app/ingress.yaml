@@ -1,0 +1,25 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: django-app-ingress
+  namespace: crypto
+  annotations:
+    cert-manager.io/cluster-issuer: we-cluster-issuer
+    nginx.ingress.kubernetes.io/rewrite-target: /  # This is specific to NGINX; adjust if you're using a different controller
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: crypto.hmdkh.ir  # Replace with your actual domain or subdomain
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: django-app-service  # Name of the service you want to expose
+            port:
+              number: 8000  # Port on the service (make sure it's the same port as in the service manifest)
+    tls:
+    - hosts:
+      - crypto.hmdkh.ir
+      secretName: crypto-tls
