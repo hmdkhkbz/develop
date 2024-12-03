@@ -1,0 +1,59 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: django-app
+  namespace: crypto
+spec:
+  serviceName: "django-app"
+  replicas: 3
+  selector:
+    matchLabels:
+      app: django-app
+  template:
+    metadata:
+      labels:
+        app: django-app
+    spec:
+      containers:
+        - name: django-container
+          image: registry.hmdkh.ir/crypto:1.0.65
+          imagePullPolicy: Always
+          env:
+            - name: DATABASE_NAME
+              valueFrom:
+                secretKeyRef:
+                  key: DATABASE_NAME
+                  name: mysql-credentials
+            - name: DATABASE_USER
+              valueFrom:
+                secretKeyRef:
+                  key: DATABASE_USER
+                  name: mysql-credentials
+            - name: DATABASE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: DATABASE_PASSWORD
+                  name: mysql-credentials
+            - name: DATABASE_HOST
+              valueFrom:
+                configMapKeyRef:
+                  key: DATABASE_HOST
+                  name: django-config
+            - name: DATABASE_PORT
+              valueFrom:
+                configMapKeyRef:
+                  key: DATABASE_PORT
+                  name: django-config
+          ports:
+            - containerPort: 8000
+              protocol: TCP
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      imagePullSecrets:
+        - name: my-registry-secret
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
