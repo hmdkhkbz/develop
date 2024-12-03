@@ -23,7 +23,7 @@ spec:
     spec:
       containers:
         - name: django-container
-          image: registry-c7e79e924d-nd.apps.ir-central1.arvancaas.ir/crypto-exchange5:hjjjd
+          image: registry-c7e79e924d-nd.apps.ir-central1.arvancaas.ir/crypto-exchange5:1.02
           imagePullPolicy: Always
           env:
             - name: DATABASE_NAME
