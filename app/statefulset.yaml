@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: django-container
-          image: registry.hmdkh.ir/crypto:1.0.90
+          image: registry.hmdkh.ir/crypto:1.0.91
           imagePullPolicy: Always
           env:
             - name: DATABASE_NAME
