@@ -1,7 +1,7 @@
 apiVersion: v1
 data:
-  DATABASE_HOST: my-db-pxc-db-haproxy.pxc.svc.cluster.local
-  DATABASE_PORT: "3306"
+  DATABASE_HOST: 
+  DATABASE_PORT: 
 kind: ConfigMap
 metadata:
   name: django-config
